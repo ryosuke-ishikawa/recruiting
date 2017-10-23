@@ -1,29 +1,145 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<% provide(:title, '新規登録') %>
+<div class = "container">
+  <div class = "center">
+    <h1>新規登録</h1>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+       <%= render 'shared/error_messages', object: f.object %>
+        <div class="field">
+          <%= f.label :email, class: "control-label" %>
+          <%= f.email_field :email, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class = "row row-10">
+          <div class = "field">
+            <div class ="col-md-6">
+              <%= f.label :lastname %>
+              <%= f.text_field :lastname, class: "form-control" %>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-md-6">
+                <%= f.label :firstname %>
+                <%= f.text_field :firstname, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class = "row row-10">
+          <div class = "field">
+            <div class ="col-md-6">
+              <%= f.label :lastname_kana %>
+              <%= f.text_field :lastname_kana, class: "form-control" %>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-md-6">
+                <%= f.label :firstname_kana %>
+                <%= f.text_field :firstname_kana, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <%= f.label :性別 %><br />
+        <div class ="row row-10">
+          <div class = "field">
+            <div class ="col-xs-4">
+              <div class="radio-inline">
+                <%= f.radio_button :sex, :male %>
+                <%= f.label :男性 %>
+              </div>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-xs-4">
+                <div class="radio-inline">
+                  <%= f.radio_button :sex, :female %>
+                  <%= f.label :女性 %>
+                </div>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-xs-4">
+                <div class="radio-inline">
+                  <%= f.radio_button :sex, :other %>
+                  <%= f.label :その他 %>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form_date_select">
+          <%= f.label :birthday %><br />
+          <%= raw sprintf(
+            f.date_select(
+              :birthday,
+              :use_month_numbers => true,
+              :start_year => Time.now.year - 50,
+              :end_year => Time.now.year,
+              date_separator: '%s'),
+            '年', '月') + '日'
+          %>
+        </div>
+
+      <div class = "row row-10">
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :採用年度 %>
+          <%= f.select :adoption_year, options_for_select(["2017年","2018年" , "2019年"]) %>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row row-10">
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :出身地 %>
+          <%= f.text_field :birthplace, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row row-10">
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :電話番号 %>
+          <%= f.telephone_field :phone, placeholder: "06-1234-5678", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :携帯番号 %>
+          <%= f.telephone_field :mobilephone, placeholder: "090-1234-5678", class: "form-control"  %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, class: "control-label" %>
+        <% if @validatable %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+
+
+      <div class="field">
+        <%= f.label :password_confirmation, class: "control-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+        <div class="actions">
+          <%= f.submit "新規登録", class: "btn btn-lg btn-warning" %>
+        </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "students/shared/links" %>
+  <% end %>
+</div>

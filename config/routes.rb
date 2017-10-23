@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+
   devise_for :students, controllers: {
     sessions:      'students/sessions',
     passwords:     'students/passwords',
     registrations: 'students/registrations'
   }
+  resources :students, only: [:show]
+
   devise_for :company_users, controllers: {
     sessions:      'company_users/sessions',
     passwords:     'company_users/passwords',
