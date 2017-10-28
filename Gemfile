@@ -6,6 +6,10 @@ gem 'rails', '4.2.7.1'
 gem 'bootstrap-sass'
 gem 'sprockets'
 gem 'devise'
+gem 'carrierwave'
+gem 'rmagick'
+gem 'fog'
+
 gem 'awesome_print', require: 'ap'
 gem 'meta_request', group: :development
 gem 'quiet_assets', group: :development
