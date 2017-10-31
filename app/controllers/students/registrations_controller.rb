@@ -7,11 +7,18 @@ class Students::RegistrationsController < Devise::RegistrationsController
 
   private
 
-      def sign_up_params
-        params.require(:student).permit(:email, :password, :password_confirmation, :lastname,
-        :firstname, :lastname_kana, :firstname_kana, :sex, :birthday, :adoption_year, :status,
-        :form_photo, :birthplace, :phone, :mobilephone)
-      end
+    def sign_up_params
+      params.require(:student).permit(:email, :password, :password_confirmation, :lastname,
+      :firstname, :lastname_kana, :firstname_kana, :sex, :birthday, :adoption_year, :status,
+      :form_photo, :birthplace, :phone, :mobilephone)
+    end
+    
+    def account_update_params
+      params.require(:student).permit(:email, :password, :password_confirmation, :current_password, :lastname,
+      :firstname, :lastname_kana, :firstname_kana, :sex, :birthday, :adoption_year, :status,
+      :form_photo, :birthplace, :phone, :mobilephone)
+    end
+      
 
   # GET /resource/sign_up
   # def new

@@ -19,11 +19,25 @@ margin-bottom: 10px;
 }
 
 /* header */
-header {
+.navbar-default{
   background-color: #041A31;
-  a{
-    font-weight: bold;
-    color: #fff;
+}
+
+#navbar {
+  a {
+  color: #fff;
+  }
+  a:hover {
+  color: #fff;
+  text-decoration: underline; 
+  }
+}
+
+#fat-menu {
+  .dropdown-menu {
+    a {
+    color: gray;
+    }
   }
 }
 
@@ -67,6 +81,7 @@ $gray-medium-light: #eaeaea;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 /* miscellaneous */
 
 .debug_dump {
@@ -79,8 +94,9 @@ $gray-medium-light: #eaeaea;
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+input, textarea, select,.uneditable-input {
   border: 1px solid #bbb;
+  border-radius:5px;
   padding: 10px;
   margin-bottom: 15px;
   @include box_sizing;

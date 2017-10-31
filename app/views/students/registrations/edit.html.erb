@@ -1,43 +1,164 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<% provide(:title, '基本情報編集') %>
+<div class = "container">
+  <div class = "center">
+    <h1>基本情報編集</h1>
   </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+       <%= render 'shared/error_messages', object: f.object %>
+        <div class="field">
+          <%= f.label :email, class: "control-label" %>
+          <%= f.email_field :email, autofocus: true, class: "form-control" %>
+        </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <div class = "row row-10">
+          <div class = "field">
+            <div class ="col-md-6">
+              <%= f.label :lastname %>
+              <%= f.text_field :lastname, class: "form-control" %>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-md-6">
+                <%= f.label :firstname %>
+                <%= f.text_field :firstname, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <div class = "row row-10">
+          <div class = "field">
+            <div class ="col-md-6">
+              <%= f.label :lastname_kana %>
+              <%= f.text_field :lastname_kana, class: "form-control" %>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-md-6">
+                <%= f.label :firstname_kana %>
+                <%= f.text_field :firstname_kana, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+
+        <%= f.label :性別 %><br />
+        <div class ="row row-10">
+          <div class = "field">
+            <div class ="col-xs-4">
+              <div class="radio-inline">
+                <%= f.radio_button :sex, :male %>
+                <%= f.label :男性 %>
+              </div>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-xs-4">
+                <div class="radio-inline">
+                  <%= f.radio_button :sex, :female %>
+                  <%= f.label :女性 %>
+                </div>
+            </div>
+          </div>
+          <div class = "field">
+            <div class ="col-xs-4">
+                <div class="radio-inline">
+                  <%= f.radio_button :sex, :other %>
+                  <%= f.label :その他 %>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form_date_select">
+          <%= f.label :birthday %><br />
+          <%= raw sprintf(
+            f.date_select(
+              :birthday,
+             {
+               :use_month_numbers => true,
+               :start_year => Time.now.year - 50,
+               :end_year => Time.now.year,
+               date_separator: '%s'
+             },
+             {
+               style: 'display: inline-block;'
+             }
+           ),
+           '年', '月') + '日'
+         %>
+        </div>
+
+      <div class = "row row-10">
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :採用年度 %>
+          <%= f.select :adoption_year, options_for_select(["2017年","2018年" , "2019年"]) %>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row row-10">
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :出身地 %>
+          <%= f.text_field :birthplace, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row row-10">
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :電話番号 %>
+          <%= f.telephone_field :phone, placeholder: "06-1234-5678", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class = "field">
+          <div class="col-md-6">
+          <%= f.label :携帯番号 %>
+          <%= f.telephone_field :mobilephone, placeholder: "090-1234-5678", class: "form-control"  %>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.label :form_photo %><br />
+        <% if current_student.form_photo.present? %>
+        <%= image_tag @student.form_photo.thumb.url %>
+        <% else %>
+        <% end %>
+        <%= f.file_field :form_photo %>
+      </div> 
+
+      <div class="field">
+        <%= f.label :password, class: "control-label" %>
+        <% if @validatable %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+
+
+      <div class="field">
+        <%= f.label :password_confirmation, class: "control-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+      
+      <div class="field">
+        <%= f.label :current_password, class: "control-label" %> <i>（変更する場合、現在のパスワードを入力してください。)</i>
+        <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="row">
+    <div class="col-md-3 col-md-offset-3">
+        <div class="actions">
+          <%= f.submit "更新", class: "btn btn-lg btn-warning" %>
+        </div>
+    </div>
+  </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

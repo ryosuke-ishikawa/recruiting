@@ -1,6 +1,12 @@
 <% provide(:title, "トップ")%>
 <div class="container">
-
-<%= @student.email %>
+<% if @student.form_photo.present? %>
+<p><%= image_tag @student.form_photo.thumb.url %></p>
+<% else %>
+<% end %>
+<p>メールアドレス</p>
+<p><%= @student.email %></p>
+<p>郵便番号</p>
+<p><%= @student.address.postcode %></p>
 
 </div>

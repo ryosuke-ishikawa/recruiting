@@ -1,8 +1,13 @@
-<header class="navbar navbar-expand-md navbar-fixed-top" >
+<header class="navbar navbar-default navbar-fixed-top" >
  <div class="container">
    <%= link_to "recruit", '#', id: "logo" %>
-   <nav>
-     <div class="collapse navbar-collapse" id="navbarCollapse">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <div id="navbar" class="navbar-collapse collapse">
      <ul class="nav navbar-nav navbar-right">
        <li><%= link_to "トップ",         root_path %></li>
        <li><%= link_to "ご質問",         help_path %></li>
@@ -14,7 +19,8 @@
               </a>
               <ul class="dropdown-menu">
                 <li><%= link_to "プロフィール", current_student %></li>
-                <li><%= link_to "登録情報編集", '#' %></li>
+                <li><%= link_to "基本情報編集", edit_student_registration_path(current_student) %></li>
+                <li><%= link_to "住所編集", edit_address_path(current_student) %></li>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "ログアウト", destroy_student_session_path, method: "delete" %>
@@ -27,6 +33,5 @@
         <% end %>
      </ul>
     </div>
-   </nav>
  </div>
 </header>

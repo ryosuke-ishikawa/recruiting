@@ -9,6 +9,8 @@ gem 'devise'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'fog'
+gem 'dotenv-rails'
+gem 'enum_help'
 
 gem 'awesome_print', require: 'ap'
 gem 'meta_request', group: :development

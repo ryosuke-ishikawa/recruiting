@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023025633) do
+ActiveRecord::Schema.define(version: 20171030070812) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer  "student_id"
+    t.string   "postcode"
+    t.integer  "prefecture_id"
+    t.string   "city1"
+    t.string   "city2"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "addresses", ["prefecture_id"], name: "index_addresses_on_prefecture_id"
+  add_index "addresses", ["student_id"], name: "index_addresses_on_student_id"
 
   create_table "company_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,6 +43,13 @@ ActiveRecord::Schema.define(version: 20171023025633) do
 
   add_index "company_users", ["email"], name: "index_company_users_on_email", unique: true
   add_index "company_users", ["reset_password_token"], name: "index_company_users_on_reset_password_token", unique: true
+
+  create_table "prefectures", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "area",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "students", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

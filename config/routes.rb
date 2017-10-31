@@ -5,13 +5,18 @@ Rails.application.routes.draw do
     passwords:     'students/passwords',
     registrations: 'students/registrations'
   }
-  resources :students, only: [:show]
-
+  
   devise_for :company_users, controllers: {
-    sessions:      'company_users/sessions',
-    passwords:     'company_users/passwords',
-    registrations: 'company_users/registrations'
+  sessions:      'company_users/sessions',
+  passwords:     'company_users/passwords',
+  registrations: 'company_users/registrations'
   }
+  
+  resources :students, only: [:show]
+  resources :addresses, only: [:create, :new, :edit, :update]
+
+
+  
   root 'top#top'
   get '/help',     to: 'top#help'
   get '/about',    to: 'top#about'
