@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030070812) do
+ActiveRecord::Schema.define(version: 20171031072029) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "student_id"
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(version: 20171030070812) do
   add_index "addresses", ["prefecture_id"], name: "index_addresses_on_prefecture_id"
   add_index "addresses", ["student_id"], name: "index_addresses_on_student_id"
 
+  create_table "companies", force: :cascade do |t|
+    t.string   "postcode"
+    t.integer  "prefecture_id"
+    t.string   "city1"
+    t.string   "city2"
+    t.string   "phone"
+    t.string   "home_url"
+    t.string   "recruit_url"
+    t.integer  "business_id"
+    t.integer  "listing_id"
+    t.integer  "employee_number_id"
+    t.integer  "activeyear"
+    t.string   "business_lineup"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "companies", ["business_id"], name: "index_companies_on_business_id"
+  add_index "companies", ["employee_number_id"], name: "index_companies_on_employee_number_id"
+  add_index "companies", ["listing_id"], name: "index_companies_on_listing_id"
+  add_index "companies", ["prefecture_id"], name: "index_companies_on_prefecture_id"
+
   create_table "company_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -39,6 +61,12 @@ ActiveRecord::Schema.define(version: 20171030070812) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "company_id"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "firstname_kana"
+    t.string   "lastname_kana"
+    t.integer  "owner"
   end
 
   add_index "company_users", ["email"], name: "index_company_users_on_email", unique: true
