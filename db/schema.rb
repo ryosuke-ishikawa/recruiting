@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031072029) do
+ActiveRecord::Schema.define(version: 20171031081315) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "student_id"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20171031072029) do
     t.string   "business_lineup"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "name"
+    t.string   "logo"
   end
 
   add_index "companies", ["business_id"], name: "index_companies_on_business_id"
